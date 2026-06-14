@@ -1,15 +1,14 @@
-import { StrictMode } from 'react'
+// import { StrictMode } from 'react'
 import { createRoot } from 'react-dom/client'
 import { createBrowserRouter, RouterProvider } from 'react-router-dom'
 import './index.css'
-import Login from './Routes/Login.tsx'
+import { LoginPage } from './Pages/LoginPage.tsx'
 import { MainLayout } from './layout/MainLayout.tsx'
 import { ProtectedRoute } from './Components/ProtectedRoute.tsx'
 import { HomePage } from './Pages/HomePage.tsx'
 import { ShowDetailPage } from './Pages/ShowDetailPage.tsx'
 import { BrowsePage } from './Pages/BrowsePage.tsx'
-import { Register } from './Routes/Register.tsx'
-
+import { AuthProvider } from './features/auth/AuthContext.tsx'
 
 const router = createBrowserRouter ([
   {
@@ -35,16 +34,12 @@ const router = createBrowserRouter ([
     ]
   },
   {
-    path: 'register',
-    element: <Register/>
-  },
-  {
     path: 'login',
-    element: <Login/>
+    element: <LoginPage/>
   },
 ])
 createRoot(document.getElementById('root')!).render(
-  <StrictMode>
-    <RouterProvider router={router}/>
-  </StrictMode>,
+  <AuthProvider>
+    <RouterProvider router={router} />
+  </AuthProvider>
 )

@@ -1,14 +1,15 @@
-// import { Navigate, Outlet, useLocation } from "react-router-dom"
+import { Navigate, Outlet, useLocation } from "react-router-dom"
+import { useAuth } from "../features/auth/useAuth"
 
 export const ProtectedRoute = () => {
 
-    // const { isAuthenticated } = useAuth()
-    // const location = useLocation()
+    const { isAuthenticated } = useAuth()
+    const location = useLocation()
 
-    // if (!isAuthenticated) {
-    //     return <Navigate to="/login" replace state={{ from: location }} />
-    // }
+    if (!isAuthenticated) {
+        return <Navigate to="/login" state={{ from: location.pathname }} replace />;
+    }
 
-    // return <Outlet />
+    return <Outlet />
 
 }
